@@ -6,10 +6,10 @@ function App() {
 
   return (
       <div className="flex flex-col md:flex-row gap-3">
-      <Card className="bg-[#7E7C7C] border-[#7E7C7C] md:w-170 w-full flex items-center justify-center">
+      <Card className="bg-[#303236] border-[#303236] md:w-170 w-full flex items-center justify-center">
           <Leftsidebar />
       </Card>
-          <Card className="bg-[#7E7C7C] border-[#7E7C7C] md:w-full w-full ">
+          <Card className="bg-[#303236] border-[#303236] md:w-full w-full ">
 
           </Card>
       </div>

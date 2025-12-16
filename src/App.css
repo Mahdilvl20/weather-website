@@ -1,5 +1,6 @@
 #root {
-  margin: 0 auto;
   text-align: center;
     background-color: #191B1F;
+    justify-content: center;
+    align-items: center;
 }
