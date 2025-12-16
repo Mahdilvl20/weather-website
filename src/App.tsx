@@ -2,6 +2,7 @@
 import './App.css'
 import {Card} from "@/components/ui/card.tsx";
 import Leftsidebar from "./components/template/leftsidebar.tsx";
+import Rightsidebar from "@/components/template/rightsidebar.tsx";
 function App() {
 
   return (
@@ -10,7 +11,7 @@ function App() {
           <Leftsidebar />
       </Card>
           <Card className="bg-[#303236] border-[#303236] md:w-full w-full ">
-
+                <Rightsidebar/>
           </Card>
       </div>
        )
