@@ -4,13 +4,12 @@ import sun from '@/assets/sun.svg';
 import cloudy from '@/assets/cloudy.svg';
 import cloudysunyrainny from '@/assets/cloudysunyrainny.svg';
 import rain from '@/assets/rain.svg';
-import Snowfall from 'react-snowfall';
+import Today from "@/components/template/rightsidebar-today";
 
 
 export default function Rightsidebar(){
  return (
      <div className={"flex flex-col pl-2"}>
-         <Snowfall color="#dee4fd" wind={[2,1]} />
         <div className={"flex items-start ml-5 p-2"}>
             <Label className={"text-white text-2xl underline decoration-white decoration-2 underline-offset-4 [text-decoration-style:wavy] tracking-widest pt-1"}>Week</Label>
         </div>
@@ -64,7 +63,12 @@ export default function Rightsidebar(){
                      <sup className="text-xl font-bold">°C</sup>
                  </Label>
              </div>
-
+         </div>
+         <div className={"flex items-start ml-5 p-2 mt-12"}>
+             <Label className={"text-white text-2xl decoration-white"}>Today’s Overview</Label>
+         </div>
+         <div>
+                <Today/>
          </div>
      </div>
  )
