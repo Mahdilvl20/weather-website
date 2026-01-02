@@ -5,6 +5,7 @@ import cloudy from '@/assets/cloudy.svg';
 import cloudysunyrainny from '@/assets/cloudysunyrainny.svg';
 import rain from '@/assets/rain.svg';
 import Today from "@/components/template/rightsidebar-today";
+import Chart from "@/components/template/rightsidebar-today/index2.tsx";
 
 
 export default function Rightsidebar(){
@@ -13,7 +14,7 @@ export default function Rightsidebar(){
         <div className={"flex items-start ml-5 p-2"}>
             <Label className={"text-white text-2xl underline decoration-white decoration-2 underline-offset-4 [text-decoration-style:wavy] tracking-widest pt-1"}>Week</Label>
         </div>
-         <div className={"mt-12 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-7 place-items-center"}>
+         <div className={"mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-7 place-items-center"}>
              <div className={"flex flex-col p-5 bg-[#252222] rounded-xl shadow-lg shadow-black/60 items-center justify-center gap-3 w-full max-w-[140px]"}>
                     <Label className={"text-white text-xl"}>Sun</Label>
                     <img src={windySunny} alt={"windy-sunny"} className="w-20 h-20 shrink-0 mt-2"/>
@@ -64,11 +65,12 @@ export default function Rightsidebar(){
                  </Label>
              </div>
          </div>
-         <div className={"flex items-start ml-5 p-2 mt-12"}>
+         <div className={"flex items-start ml-5 p-2 mt-5"}>
              <Label className={"text-white text-2xl decoration-white"}>Today’s Overview</Label>
          </div>
          <div>
                 <Today/>
+                <Chart/>
          </div>
      </div>
  )
