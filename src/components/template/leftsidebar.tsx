@@ -1,4 +1,4 @@
-import {Check, ChevronsUpDown} from "lucide-react";
+import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command.tsx";
 import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover.tsx";
@@ -10,45 +10,47 @@ import water from '@/assets/water.svg';
 import stroke from '@/assets/Stroke.svg';
 import {Label} from "@/components/ui/label.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
-import {useState} from "react";
-import {cn} from "@/lib/utils.ts";
+import {type ChangeEvent, useState} from "react";
+import {searchCity} from "@/services/cityservice.ts";
 
 export default function Leftsidebar(){
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
-    const frameworks = [
-        {
-            value: "iran/isfahan",
-            label: "isfahan",
-        }
-    ]
+    const [testt,setTest] = useState({});
+
+    const handleInputChange=async (e:ChangeEvent<HTMLInputElement>) => {
+        const text=e.target.value;
+
+        const cities=await searchCity(text);
+        const test=Object.values(cities).map((city)=>(city.name));
+        setTest(test);
+        console.log(test);
+    }
     return (
         <div className="flex flex-col justify-center items-center w-full">
             <div className="relative w-90">
                 <Popover open={open} onOpenChange={setOpen}>
                     <PopoverTrigger asChild className={'bg-black text-white'}>
                         <Button variant="outline" role={"combobox"} aria-expanded={open} className={"w-[200px] justify-between"}>
-                            {value ? frameworks.find((frameworks)=>frameworks.value==value)?.label:"select city..."}
+                            {value || "select city...."}
                             <ChevronsUpDown className={"opacity-50"}/>
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent className={"w-[220px] p-0"}>
+                    <PopoverContent className={"w-[220px] p-0"} onSelect={handleInputChange}>
                         <Command>
-                            <CommandInput placeholder={"Search city..."} className={"h-9"}/>
+                            <CommandInput placeholder={"Search city..."} className={"h-9"} />
                             <CommandList>
                             <CommandEmpty>City not found.</CommandEmpty>
                             <CommandGroup>
-                                {frameworks.map((framework) => (
+                                {Array.isArray(testt)&&testt.map((city,index)=>(
                                     <CommandItem
-                                        key={framework.value}
-                                        value={framework.value}
-                                        onSelect={(currentValue) => {
-                                            setValue(currentValue === value ? "" : currentValue)
+                                        key={index}
+                                        onSelect={(currentValue)=>{
+                                            setValue(currentValue)
                                             setOpen(false)
                                         }}
-                                    >
-                                        {framework.label}
-                                        <Check className={cn("ml-auto",value===framework.value?"opacity-100" : "opacity-0")}/>
+                                        >
+                                        {city}
                                     </CommandItem>
                                 ))}
                             </CommandGroup>
