@@ -1,5 +1,7 @@
-import {Search} from "lucide-react";
-import {InputGroup, InputGroupAddon, InputGroupInput} from "@/components/ui/input-group.tsx";
+import {Check, ChevronsUpDown} from "lucide-react";
+import {Button} from "@/components/ui/button.tsx";
+import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command.tsx";
+import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover.tsx";
 import cloudysunyrainny from '@/assets/cloudysunyrainny.svg';
 import cloudrainsmall from '@/assets/Cloud Rain.svg';
 import mintemp from '@/assets/min-temp.svg';
@@ -8,17 +10,52 @@ import water from '@/assets/water.svg';
 import stroke from '@/assets/Stroke.svg';
 import {Label} from "@/components/ui/label.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
+import {useState} from "react";
+import {cn} from "@/lib/utils.ts";
 
 export default function Leftsidebar(){
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState("");
+    const frameworks = [
+        {
+            value: "iran/isfahan",
+            label: "isfahan",
+        }
+    ]
     return (
         <div className="flex flex-col justify-center items-center w-full">
             <div className="relative w-90">
-            <InputGroup className={"w-90 rounded-full bg-[#C2D4D3] p-7"}>
-                <InputGroupInput placeholder={"enter city name....."} className={"ml-5"} />
-                <InputGroupAddon>
-                    <Search/>
-                </InputGroupAddon>
-            </InputGroup>
+                <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild className={'bg-black text-white'}>
+                        <Button variant="outline" role={"combobox"} aria-expanded={open} className={"w-[200px] justify-between"}>
+                            {value ? frameworks.find((frameworks)=>frameworks.value==value)?.label:"select city..."}
+                            <ChevronsUpDown className={"opacity-50"}/>
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className={"w-[220px] p-0"}>
+                        <Command>
+                            <CommandInput placeholder={"Search city..."} className={"h-9"}/>
+                            <CommandList>
+                            <CommandEmpty>City not found.</CommandEmpty>
+                            <CommandGroup>
+                                {frameworks.map((framework) => (
+                                    <CommandItem
+                                        key={framework.value}
+                                        value={framework.value}
+                                        onSelect={(currentValue) => {
+                                            setValue(currentValue === value ? "" : currentValue)
+                                            setOpen(false)
+                                        }}
+                                    >
+                                        {framework.label}
+                                        <Check className={cn("ml-auto",value===framework.value?"opacity-100" : "opacity-0")}/>
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                            </CommandList>
+                        </Command>
+                    </PopoverContent>
+                </Popover>
             </div>
             <div className={"flex justify-center"}>
                 <img src={cloudysunyrainny} alt={"cloudysunyrainny"} className={"w-70 mt-10"}/>
