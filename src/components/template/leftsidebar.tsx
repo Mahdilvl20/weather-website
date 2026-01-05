@@ -10,21 +10,25 @@ import water from '@/assets/water.svg';
 import stroke from '@/assets/Stroke.svg';
 import {Label} from "@/components/ui/label.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
-import {type ChangeEvent, useState} from "react";
+import {useState} from "react";
 import {searchCity} from "@/services/cityservice.ts";
 
-export default function Leftsidebar(){
+interface LeftsideProps {
+    onCitySelected: (cityData:{name:string,lat:number,lon:number}) => void;
+    weatherData?:any;
+}
+
+export default function Leftsidebar({onCitySelected,weatherData}: LeftsideProps) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
-    const [testt,setTest] = useState({});
+    const [cityDitailList, setCityDetailList] = useState<any[]>([]);
 
-    const handleInputChange=async (e:ChangeEvent<HTMLInputElement>) => {
-        const text=e.target.value;
 
+    const handleSearch=async (text: string) => {
+        if(text.length<2) return;
         const cities=await searchCity(text);
-        const test=Object.values(cities).map((city)=>(city.name));
-        setTest(test);
-        console.log(test);
+        const cityDetail=Array.isArray(cities)?cities:Object.values(cities|| {});
+        setCityDetailList(cityDetail);
     }
     return (
         <div className="flex flex-col justify-center items-center w-full">
@@ -36,21 +40,27 @@ export default function Leftsidebar(){
                             <ChevronsUpDown className={"opacity-50"}/>
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent className={"w-[220px] p-0"} onSelect={handleInputChange}>
+                    <PopoverContent className={"w-[220px] p-0"}>
                         <Command>
-                            <CommandInput placeholder={"Search city..."} className={"h-9"} />
+                            <CommandInput placeholder={"Search city..."} className={"h-9"} onValueChange={handleSearch}/>
                             <CommandList>
                             <CommandEmpty>City not found.</CommandEmpty>
                             <CommandGroup>
-                                {Array.isArray(testt)&&testt.map((city,index)=>(
+                                {cityDitailList?.map((city,index)=>(
+                                    console.log(city),
                                     <CommandItem
                                         key={index}
-                                        onSelect={(currentValue)=>{
-                                            setValue(currentValue)
+                                        onSelect={()=>{
+                                            setValue(city.name)
                                             setOpen(false)
+                                            onCitySelected({
+                                                name:city.name,
+                                                lat:city.lat,
+                                                lon:city.lon
+                                            })
                                         }}
                                         >
-                                        {city}
+                                        {city.name}
                                     </CommandItem>
                                 ))}
                             </CommandGroup>
@@ -63,7 +73,7 @@ export default function Leftsidebar(){
                 <img src={cloudysunyrainny} alt={"cloudysunyrainny"} className={"w-70 mt-10"}/>
             </div>
             <div className={"flex justify-center"}>
-                <Label className={"text-white text-7xl font-bold mt-5"}>30
+                <Label className={"text-white text-7xl font-bold mt-5"}>{weatherData?.current?.temperature_2m || 30}
                     <sup className="text-5xl font-bold">°C</sup>
                 </Label>
             </div>
