@@ -1,7 +1,4 @@
 import {Label} from "@/components/ui/label.tsx";
-import sun from '@/assets/sun.svg';
-import cloudysunyrainny from '@/assets/cloudysunyrainny.svg';
-import rain from '@/assets/rain.svg';
 import Today from "@/components/template/rightsidebar-today";
 import Chart from "@/components/template/rightsidebar-today/index2.tsx";
 ////////icon/////////
