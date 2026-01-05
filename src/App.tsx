@@ -9,11 +9,13 @@ function App() {
     const handleCitySelectFromSidebar=async (cityInfo:{name:string,lat:number,lon:number})=> {
         console.log("city: ",cityInfo);
         try {
-            const res=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${cityInfo.lat}&longitude=${cityInfo.lon}&current=temperature_2m,relative_humidity_2m,is_day,precipitation,rain,weather_code,pressure_msl,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&timezone=auto`)
+            const res=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${cityInfo.lat}&longitude=${cityInfo.lon}&current=temperature_2m,relative_humidity_2m,is_day,precipitation,rain,weather_code,pressure_msl,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&hourly=temperature_2m,precipitation_probability&timezone=auto`)
             const data=await res.json()
-
-            setWhatherData(data);
-            console.log("data:",data);
+            const airRes= await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${cityInfo.lat}&longitude=${cityInfo.lon}&current=us_aqi`)
+            const airData= await airRes.json()
+            const finalData={...data,air_quality:airData.current.us_aqi};
+            setWhatherData(finalData);
+            console.log("data:",finalData);
         }catch(err){
             console.log("error to receive: ",err);
         }
@@ -26,7 +28,7 @@ function App() {
           <Leftsidebar onCitySelected={handleCitySelectFromSidebar} weatherData={whatherData} />
       </Card>
           <Card className="bg-[#303236] border-[#303236] md:w-full w-full ">
-                <Rightsidebar/>
+                <Rightsidebar weatherData={whatherData} />
           </Card>
       </div>
        )

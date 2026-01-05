@@ -7,8 +7,10 @@ import rain from '@/assets/rain.svg';
 import Today from "@/components/template/rightsidebar-today";
 import Chart from "@/components/template/rightsidebar-today/index2.tsx";
 
-
-export default function Rightsidebar(){
+interface rightsideProps {
+    weatherData?:any;
+}
+export default function Rightsidebar({weatherData}: rightsideProps){
  return (
      <div className={"flex flex-col pl-2"}>
         <div className={"flex items-start ml-5 p-2"}>
@@ -69,8 +71,8 @@ export default function Rightsidebar(){
              <Label className={"text-white text-2xl decoration-white"}>Today’s Overview</Label>
          </div>
          <div>
-                <Today/>
-                <Chart/>
+                <Today weatherData={weatherData}/>
+                <Chart weatherData={weatherData}/>
          </div>
      </div>
  )
