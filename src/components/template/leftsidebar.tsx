@@ -13,6 +13,18 @@ import {Separator} from "@/components/ui/separator.tsx";
 import {useState} from "react";
 import {searchCity} from "@/services/cityservice.ts";
 
+////////img/////////
+import cloudy from "@/assets/cloudy.svg";
+import heavyrain from '@/assets/rain.svg';
+import lightRainDay from '@/assets/cloudysunyrainny.svg';
+import lightRainNight from '@/assets/lightRainNight.svg';
+import clearDay from '@/assets/sun.svg';
+import clearNight from '@/assets/clearNight.svg';
+import windyDay from '@/assets/windy-sunny.svg';
+import windyNight from '@/assets/windyNight.svg';
+import thunderstorm from '@/assets/Thunderstorm.svg';
+//////////////////////////////////////////////////////
+
 interface LeftsideProps {
     onCitySelected: (cityData:{name:string,lat:number,lon:number}) => void;
     weatherData?:any;
@@ -34,6 +46,38 @@ export default function Leftsidebar({onCitySelected,weatherData}: LeftsideProps)
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { weekday: 'long' });
     };
+    const getWeatherIcon=(code:number,isDay:number) => {
+        switch(code) {
+            case 0: return isDay===1?clearDay:clearNight;
+            case 1:
+                case 2:
+            case 3:
+                return cloudy;
+            case 45:
+            case 48:
+                return cloudy;
+            case 51:
+            case 53:
+            case 55:
+                return isDay===1?lightRainDay:lightRainNight;
+            case 61:
+            case 63:
+            case 65:
+            case 80:
+            case 81:
+            case 82:
+                return heavyrain;
+            case 71: case 73: case 75: case 77:
+            case 85: case 86:
+                return heavyrain;
+            case 95:
+            case 96:
+            case 99:
+                return thunderstorm;
+                default:
+                    return cloudy;
+        }
+    }
     const getWeatherDescription = (code: number): string => {
         switch (code) {
             case 0: return "Clear Sky";
@@ -87,7 +131,7 @@ export default function Leftsidebar({onCitySelected,weatherData}: LeftsideProps)
                 </Popover>
             </div>
             <div className={"flex justify-center"}>
-                <img src={cloudysunyrainny} alt={"cloudysunyrainny"} className={"w-70 mt-10"}/>
+                <img src={getWeatherIcon(weatherData?.current?.weather_code,weatherData?.current?.is_day)} alt={"Weather Icon"} className={"w-70 mt-10"}/>
             </div>
             <div className={"flex justify-center"}>
                 <Label className={"text-white text-7xl font-bold mt-5"}>{weatherData?.current?.temperature_2m || ""}
@@ -96,13 +140,13 @@ export default function Leftsidebar({onCitySelected,weatherData}: LeftsideProps)
             </div>
             <div className={"flex justify-center pt-15 gap-30"}>
                 <Label className={"text-white text-2xl "}>{value}</Label>
-                <Label className={"text-white text-2xl "}>{weatherData?.current?.time?getDayName(weatherData.current.time):'empty'}</Label>
+                <Label className={"text-white text-2xl "}>{weatherData?.current?.time?getDayName(weatherData?.current?.time):'empty'}</Label>
             </div>
             <Separator className={'m-5 mx-auto'} style={{width:'80%'}} />
-            <div className={"flex flex-col gap-2 items-start w-[80%] mt-10"}>
+            <div className={"flex flex-col gap-5 items-start w-[80%] mt-3"}>
                 <div className={"flex gap-2 w-full"}>
                     <img src={cloudrainsmall} alt={"cloudrainsmall"}  className="w-4 h-4 shrink-0"/>
-                    <Label className={"text-white"}>{weatherData?.current?.weather_code?getWeatherDescription(weatherData.current.weather_code):"loading..."}</Label>
+                    <Label className={"text-white"}>{getWeatherDescription(weatherData?.current?.weather_code)?getWeatherDescription(weatherData?.current?.weather_code):"loading..."}</Label>
                 </div>
                 <div className={"flex gap-2"}>
                     <img src={mintemp} alt={"mintemp"} className="w-4 h-4 shrink-0"/>
@@ -115,7 +159,7 @@ export default function Leftsidebar({onCitySelected,weatherData}: LeftsideProps)
                     <Label className={"text-white"}>{weatherData?.daily?.temperature_2m_max[0]}</Label>
                 </div>
             </div>
-            <div className={"w-fit flex bg-[#252222] rounded-md mt-15 shadow-lg shadow-black/60"}>
+            <div className={"w-fit flex bg-[#252222] rounded-md mt-10 shadow-lg shadow-black/60"}>
                 <div className={"flex justify-center m-2"}>
                     <img src={water} alt={"water"} className="w-10 h-10 shrink-0"/>
                     <div className={"flex flex-col pl-2"}>
