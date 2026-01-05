@@ -2,7 +2,6 @@ import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command.tsx";
 import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover.tsx";
-import cloudysunyrainny from '@/assets/cloudysunyrainny.svg';
 import cloudrainsmall from '@/assets/Cloud Rain.svg';
 import mintemp from '@/assets/min-temp.svg';
 import maxtemp from '@/assets/max-temp.svg';
@@ -13,15 +12,15 @@ import {Separator} from "@/components/ui/separator.tsx";
 import {useState} from "react";
 import {searchCity} from "@/services/cityservice.ts";
 
-////////img/////////
+////////icon/////////
 import cloudy from "@/assets/cloudy.svg";
 import heavyrain from '@/assets/rain.svg';
 import lightRainDay from '@/assets/cloudysunyrainny.svg';
 import lightRainNight from '@/assets/lightRainNight.svg';
 import clearDay from '@/assets/sun.svg';
 import clearNight from '@/assets/clearNight.svg';
-import windyDay from '@/assets/windy-sunny.svg';
-import windyNight from '@/assets/windyNight.svg';
+// import windyDay from '@/assets/windy-sunny.svg';
+// import windyNight from '@/assets/windyNight.svg';
 import thunderstorm from '@/assets/Thunderstorm.svg';
 //////////////////////////////////////////////////////
 
