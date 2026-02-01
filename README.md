@@ -1,13 +1,12 @@
 
 # 🌦️ Weather Website
-## 🌍 Live Demo
-🚀 **Website:** https://incredible-buttercream-7d2da5.netlify.app/
 
 A modern, fast, and beautiful **weather web application** built with the latest front‑end technologies.
 Clean UI, smooth animations, and real‑time weather & air‑quality data.
-
 ---
-
+## 🌍 Live Demo
+🚀 **Website:** https://incredible-buttercream-7d2da5.netlify.app/
+---
 ## ✨ Features
 
 - 🔍 **City Search with Autocomplete**
