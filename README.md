@@ -1,75 +1,104 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🌦️ Weather Website
+## 🌍 Live Demo
+🚀 **Website:** https://incredible-buttercream-7d2da5.netlify.app/
 
-Currently, two official plugins are available:
+A modern, fast, and beautiful **weather web application** built with the latest front‑end technologies.
+Clean UI, smooth animations, and real‑time weather & air‑quality data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- 🔍 **City Search with Autocomplete**
+- 🌡️ **Current Weather Conditions**
+- 🌫️ **Air Quality Index (AQI)**
+- 📈 **Interactive Temperature Charts**
+- 🌗 **Dark Mode (by default)**
+- 📱 **Fully Responsive Design**
+- 🎨 **Dynamic Weather Icons (Day / Night)**
+- ⚡ **Blazing Fast (Vite + Rolldown)**
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 🧠 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19**
+- **TypeScript**
+- **Vite**
+- **Tailwind CSS v4**
+- **shadcn/ui**
+- **Radix UI**
+- **Recharts**
+- **Open‑Meteo API**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🗂️ Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```txt
+src/
+ ├── components/
+ │   ├── ui/            # Reusable UI components
+ │   └── template/      # App layout components
+ ├── services/          # API & data fetching
+ ├── assets/            # Icons & images
+ ├── App.tsx
+ ├── main.tsx
+ └── index.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# install dependencies
+npm install
+
+# run development server
+npm run dev
+
+# build for production
+npm run build
 ```
+
+---
+
+## 🌍 APIs Used
+
+- **Weather Data**: Open‑Meteo Weather API  
+- **Air Quality**: Open‑Meteo Air Quality API  
+- **Weather Codes**: WMO Weather Interpretation Codes
+
+---
+
+## 🎥 Animations & UX
+
+- Smooth transitions
+- Chart animations
+- Icon changes based on weather & time
+- Subtle hover & focus effects
+
+---
+
+## 📌 Roadmap
+
+- [ ] 7‑Day Forecast
+- [ ] Location Detection (GPS)
+- [ ] Favorite Cities
+- [ ] Multi‑language Support
+
+---
+
+## 🧑‍💻 Author
+
+**Mahdi Ahmadi**  
+Frontend Developer  
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub — it really helps!
+
